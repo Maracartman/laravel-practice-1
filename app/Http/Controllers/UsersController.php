@@ -28,7 +28,6 @@ class UsersController extends Controller
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->save();
-//        dd('Usuario creado.');
         dd($user);
     }
 }
