@@ -38,4 +38,21 @@ Route::group(['prefix'=>'admin'],function (){
        'uses'=>'UsersController@destroy',
        'as'=>'users.destroy'
    ]);
+
+   Route::resource('categories','CategoriesController');
+    Route::get('categories/{id}/destroy',[
+        'uses'=>'CategoriesController@destroy',
+        'as'=>'categories.destroy'
+    ]);
+
+    Route::resource('articles','ArticlesController');
+    Route::get('articles/{id}/destroy',[
+        'uses'=>'ArticlesController@destroy',
+        'as'=>'articles.destroy'
+    ]);
+
+
+
 });
+
+

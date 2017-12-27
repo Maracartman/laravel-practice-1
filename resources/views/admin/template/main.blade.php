@@ -15,11 +15,11 @@
 @include('admin.template.partials.nav')
 @include('flash::message')
 <div class="row">
-    <div class="col-lg-3 col-md-2 col-sm-1"></div>
-    <div class="col-lg-6 col-md-8 col-sm-10">
+    <div class="col-lg-2 col-md-2 col-sm-1"></div>
+    <div class="col-lg-8 col-md-8 col-sm-10">
         @yield('content')
     </div>
-    <div class="col-lg-3 col-md-2 col-sm-1"></div>
+    <div class="col-lg-2 col-md-2 col-sm-1"></div>
 </div>
 <script type="text/javascript" src="{{asset('plugins/jquery/js/jquery.js')}}"></script>
 <script type="text/javascript" src="{{asset('plugins/bootstrap/js/bootstrap.js')}}"></script>

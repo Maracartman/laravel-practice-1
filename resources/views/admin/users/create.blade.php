@@ -3,11 +3,26 @@
 @section('title','Crear Usuario')
 
 @section('content')
+    @if(count($errors)>0)
+
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>
+                        {{$error}}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+
+    @endif
+
+
     {!! Form::open(['route'=>'users.store','method'=>'POST']) !!}
     <div class="form-group">
         {!! Form::label('name','Nombre') !!}
-        {!! Form::text('name',null,['class'=>'form-control',
-        'required','placeholder'=>'Nombre completo']) !!}
+        {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre completo']) !!}
     </div>
 
     <div class="form-group">

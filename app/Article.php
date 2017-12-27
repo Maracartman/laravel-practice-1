@@ -7,7 +7,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 
 class Article extends Model
 {
-    use Sluggable;
+//    use Sluggable;
 
 
     protected $table = "articles";
@@ -35,13 +35,13 @@ class Article extends Model
      *
      * @return array
      */
-    public function sluggable(): array
-    {
-        // TODO: Implement sluggable() method.
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
-    }
+//    public function sluggable(): array
+//    {
+//        // TODO: Implement sluggable() method.
+//        return [
+//            'slug' => [
+//                'source' => 'title'
+//            ]
+//        ];
+//    }
 }
