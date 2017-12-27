@@ -9,7 +9,10 @@ class UsersController extends Controller
 {
     //
     public function index(){
-        return view('welcome');
+        $users = User::orderBy('id','ASC')->paginate(5);
+
+
+        return view('admin.users.index')->with('users',$users);
     }
 
     public function create(){
@@ -24,10 +27,18 @@ class UsersController extends Controller
 
     }
 
+    public function destroy($id){
+        $user = User::find($id);
+        $user -> delete();
+        flash('Usuario '.$user->name.' eliminado exitosamente.')->warning();
+        return redirect()->route('users.index');
+    }
+
     public function store(Request $request){
         $user = new User($request->all());
         $user->password = bcrypt($request->password);
         $user->save();
-        dd($user);
+        flash('Exito al guardar el usuario.')->success();
+        return redirect()->route('users.index');
     }
 }

@@ -181,7 +181,8 @@ return [
          * Own providers
          *
          * */
-        Collective\Html\HtmlServiceProvider::class
+        Collective\Html\HtmlServiceProvider::class,
+        Laracasts\Flash\FlashServiceProvider::class,
 
     ],
 
@@ -236,7 +237,7 @@ return [
          *  Own Alliases
          * */
         'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

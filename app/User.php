@@ -24,7 +24,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-         'remember_token',
+        'password','remember_token',
     ];
 
     public function articles(){
