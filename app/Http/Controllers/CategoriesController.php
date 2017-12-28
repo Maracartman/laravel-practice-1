@@ -10,6 +10,11 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller implements CrudController
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     //
     public function index()
     {

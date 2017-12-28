@@ -18,10 +18,10 @@
 
     <div class="form-group">
         {!! Form::label('type','Tipo') !!}
-        {!! Form::select('type',[''=>'Seleccione','member'=>
+        {!! Form::select('type',['member'=>
         'Miembro','admin'=>'Administrador'
         ],
-        $user->type,['class'=>'form-control']) !!}
+        $user->type,['class'=>'form-control','placeholder'=>'Seleccione una opción...','required']) !!}
     </div>
 
     <div class="form-group center-block">

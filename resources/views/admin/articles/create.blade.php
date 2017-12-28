@@ -34,13 +34,13 @@
     <div class="form-group">
         {!! Form::label('user','Usuario') !!}
         {!! Form::select('user_id',$users,
-        null,['class'=>'form-control']) !!}
+        null,['class'=>'form-control','placeholder'=>'Seleccione una opción...','required']) !!}
     </div>
 
     <div class="form-group">
         {!! Form::label('category','Categoría') !!}
         {!! Form::select('category_id',$categories,
-        null,['class'=>'form-control']) !!}
+        null,['class'=>'form-control','placeholder'=>'Seleccione una opción...','required']) !!}
     </div>
 
 

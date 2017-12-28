@@ -1,14 +1,48 @@
 @extends('admin/template/main')
 
-@section('title','Editar categoría '.$category->name)
+@section('title','Editar artículo '.$article->title)
+
+{{--{{dd($users)}}--}}
 
 @section('content')
-    {!! Form::open(['route'=>['categories.update',$category->id],'method'=>'PUT']) !!}
+    @if(count($errors)>0)
+
+        <div class="alert alert-danger" role="alert">
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>
+                        {{$error}}
+                    </li>
+                @endforeach
+            </ul>
+        </div>
+
+
+    @endif
+
+
+    {!! Form::open(['route'=>['articles.update',$article->id],'method'=>'PUT']) !!}
     <div class="form-group">
-        {!! Form::label('name','Nombre') !!}
-        {!! Form::text('name',$category->name,['class'=>'form-control',
-        'required','placeholder'=>'Nombre categoría']) !!}
+        {!! Form::label('name','Título') !!}
+        {!! Form::text('title',$article->title,['class'=>'form-control','placeholder'=>'Título']) !!}
     </div>
+    <div class="form-group">
+        {!! Form::label('name','Contenido') !!}
+        {!! Form::text('content',$article->content,['class'=>'form-control','placeholder'=>'Contenido']) !!}
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('user','Usuario') !!}
+        {!! Form::select('user_id',$users,
+        $article->user_id,['class'=>'form-control','placeholder'=>'Seleccione una opción...','required']) !!}
+    </div>
+
+    <div class="form-group">
+        {!! Form::label('category','Categoría') !!}
+        {!! Form::select('category_id',$categories,
+        $article->category_id,['class'=>'form-control','placeholder'=>'Seleccione una opción...','required']) !!}
+    </div>
+
 
     <div class="form-group center-block">
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 interface CrudController
 {
     //
-    public function index();
+//    public function index();
     public function create();
     public function show($id);
     public function edit($id);

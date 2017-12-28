@@ -37,15 +37,18 @@
         'required','placeholder'=>'Contraseña']) !!}
     </div>
 
-    <div class="form-group">
-        {!! Form::label('type','Tipo') !!}
-        {!! Form::select('type',[''=>'Seleccione','member'=>'Miembro','admin'=>'Administrador'],
-        null,['class'=>'form-control']) !!}
-    </div>
+    @guest
+        @else
+            <div class="form-group">
+                {!! Form::label('type','Tipo') !!}
+                {!! Form::select('type',['member'=>'Miembro','admin'=>'Administrador'],
+                null,['class'=>'form-control','placeholder'=>'Seleccione una opción...','required']) !!}
+            </div>
+            @endguest
 
-    <div class="form-group center-block">
+            <div class="form-group center-block">
 
-        {!! Form::submit('Registrar',['class'=>'btn btn-primary']) !!}
-    </div>
-    {!! Form::close() !!}
+                {!! Form::submit('Registrar',['class'=>'btn btn-primary']) !!}
+            </div>
+            {!! Form::close() !!}
 @endsection

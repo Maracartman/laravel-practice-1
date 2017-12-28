@@ -42,7 +42,14 @@ class ArticlesController extends Controller
     {
         // TODO: Implement edit() method.ç
         $article = Article::find($id);
-        return view('admin.articles.edit')->with('article', $article);
+        $users = User::all()->whereNotIn('type', 'admin')->pluck('name','id');
+        $categories = Category::all()->pluck('name','id');
+        return view('admin.articles.edit',
+            [
+                'users' => $users,
+                'article' => $article,
+                'categories' => $categories
+            ]);
     }
 
     public function destroy($id)
@@ -57,6 +64,12 @@ class ArticlesController extends Controller
     public function update(Request $request, $id)
     {
         // TODO: Implement update() method.
+        // TODO: Implement update() method.
+        $article = Article::find($id);
+        $article->fill($request->all());
+        $article->save();
+        flash('Exito al actualizar el artículo.')->success();
+        return redirect()->route('articles.index');
     }
 
     public function store(ArticleRequest $request)

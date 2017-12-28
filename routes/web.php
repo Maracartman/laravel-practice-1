@@ -15,18 +15,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*Route::get('/articles/',[
-    'as' => 'articles',
-    'uses'=> 'UserController@index'
-
-],function (){
-    echo 'Bienvenido a articles ';
-});*/
-
 Route::group(['prefix'=>'articles'],function (){
-   /* Route::get('view/{article?}',function ($article='vacio'){
-       echo 'Articulo: '.$article;
-    });*/
     Route::get('view/{id}',['uses' =>'TestController@view',
         'as'=>'articlesView']);
 });
@@ -51,8 +40,17 @@ Route::group(['prefix'=>'admin'],function (){
         'as'=>'articles.destroy'
     ]);
 
+    Route::resource('tags','TagsController');
+    Route::get('tags/{id}/destroy',[
+        'uses'=>'TagsController@destroy',
+        'as'=>'tags.destroy'
+    ]);
+
 
 
 });
 
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
