@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
 use App\Http\Requests\ArticleRequest;
+use App\Image;
+use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticlesController extends Controller
     implements CrudController
@@ -26,10 +29,11 @@ class ArticlesController extends Controller
 
         $users = User::all()->whereNotIn('type', 'admin')->pluck('name','id');
         $categories = Category::all()->pluck('name','id');
-
+        $tags = Tag::orderBy('name','ASC')->get()->pluck('name','id');
         return view('admin.articles.create', [
             'users' => $users,
-            'categories' => $categories
+            'categories' => $categories,
+            'tags'=>$tags
         ]);
     }
 
@@ -44,11 +48,13 @@ class ArticlesController extends Controller
         $article = Article::find($id);
         $users = User::all()->whereNotIn('type', 'admin')->pluck('name','id');
         $categories = Category::all()->pluck('name','id');
+        $tags = Tag::all()->pluck('name','id');
         return view('admin.articles.edit',
             [
                 'users' => $users,
                 'article' => $article,
-                'categories' => $categories
+                'categories' => $categories,
+                'tags' => $tags
             ]);
     }
 
@@ -68,6 +74,21 @@ class ArticlesController extends Controller
         $article = Article::find($id);
         $article->fill($request->all());
         $article->save();
+
+        //Manipulacion de imagen
+        if($request->file('image')){
+            $file = $request->file('image');
+            $fileName = 'img_'.time().'.'.$file->getClientOriginalExtension();
+            $path = public_path() .'/images/articles/';
+            $file->move($path,$fileName);
+            $image = new Image();
+            $image->name = $fileName;
+            $image->article()->associate($article);
+            $image->save();
+        }
+
+        $article->tags()->sync($request->tags);
+
         flash('Exito al actualizar el artículo.')->success();
         return redirect()->route('articles.index');
     }
@@ -76,7 +97,24 @@ class ArticlesController extends Controller
     {
         // TODO: Implement store() method.
         $article = new Article($request->all());
+        $article->user_id = Auth::id();
         $article->save();
+
+        //Manipulacion de imagen
+        if($request->file('image')){
+            $file = $request->file('image');
+            $fileName = 'img_'.time().'.'.$file->getClientOriginalExtension();
+            $path = public_path() .'/images/articles/';
+            $file->move($path,$fileName);
+            $image = new Image();
+            $image->name = $fileName;
+            $image->article()->associate($article);
+            $image->save();
+        }
+
+        $article->tags()->sync($request->tags);
+
+
         flash('Exito al guardar el artículo.')->success();
         return redirect()->route('articles.index');
     }

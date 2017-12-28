@@ -25,7 +25,7 @@ class TagRequest extends FormRequest
     {
         return [
             //
-            'name' => 'required | min:4 | max:120 | unique:tags' ,
+            'name' => 'required | min:1 | max:120 | unique:tags' ,
         ];
     }
 }
